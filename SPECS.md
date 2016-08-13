@@ -24,7 +24,7 @@ Creating this web application will provide exposure to:
 
 ## Quality Rubric
 - [ ] User-Friendly - Pages load fast, UX design principles followed, styled enough to not offend the eye
-- [ ] Tested - All specs passing; at least [70%] test coverage as reported by CodeClimate
+- [ ] Tested - All specs passing
 - [ ] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
 - [ ] Functional - Project runs in localhost and, if required, in production [on Heroku]
 - [ ] Structured - Directory structure allows new developers to quickly find and add files

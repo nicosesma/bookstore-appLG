@@ -23,13 +23,18 @@ Creating this web application will provide exposure to:
 - [ ] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
 
 ## Quality Rubric
-
-- Code is well formatted without any linting errors
-- Variables, functions, css classes, etc. are meaningfully named (no comments exist in code to explain functionality - the names serve that function)
-- Functions are small and serve a single purpose
-- Code is well organized into a meaningful file structure
-- Code is reasonably tested with a test suite
-- Interface is user friendly
+- [ ] User-Friendly - Pages load fast, UX design principles followed, styled enough to not offend the eye
+- [ ] Tested - All specs passing; at least [70%] test coverage as reported by CodeClimate
+- [ ] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
+- [ ] Functional - Project runs in localhost and, if required, in production [on Heroku]
+- [ ] Structured - Directory structure allows new developers to quickly find and add files
+- [ ] Clearly Named - Functions, variables, files, CSS classes and ids
+- [ ] Abstracted - Small, single-responsibility functions leveraged for encapsulation & reusability
+- [ ] Git Logged - Readable and clean with clear, complete, professional commit messages
+- [ ] Linted - Gets no unexpected errors from jshint linter
+- [ ] Reviewed - Passes [3.0 GPA] CodeClimate or peer code review
+- [ ] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
+- [ ] Fast - Delivers optimal O(n) complexity
 
 ---
 

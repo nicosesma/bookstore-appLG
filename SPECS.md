@@ -23,10 +23,10 @@ Creating this web application will provide exposure to:
 - [ ] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
 
 ## Quality Rubric
-- [ ] User-Friendly - Pages load fast, UX design principles followed, styled enough to not offend the eye
+- [ ] User-Friendly - Pages load fast, styled enough to not offend the eye
 - [ ] Tested - All specs passing
 - [ ] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
-- [ ] Functional - Project runs in localhost and, if required, in production [on Heroku]
+- [ ] Functional - Project runs in localhost
 - [ ] Structured - Directory structure allows new developers to quickly find and add files
 - [ ] Clearly Named - Functions, variables, files, CSS classes and ids
 - [ ] Abstracted - Small, single-responsibility functions leveraged for encapsulation & reusability
@@ -34,7 +34,6 @@ Creating this web application will provide exposure to:
 - [ ] Linted - Gets no unexpected errors from jshint linter
 - [ ] Reviewed - Passes [3.0 GPA] CodeClimate or peer code review
 - [ ] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
-- [ ] Fast - Delivers optimal O(n) complexity
 
 ---
 

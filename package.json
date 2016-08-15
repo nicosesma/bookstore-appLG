@@ -1,0 +1,24 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "Create a simple content management system for an online bookstore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicosesma/bookstore-appLG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicosesma/bookstore-appLG/issues"
+  },
+  "homepage": "https://github.com/nicosesma/bookstore-appLG#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pg-promise": "^5.3.1",
+    "pug": "^2.0.0-beta5"
+  }
+}

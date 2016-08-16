@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/nicosesma/bookstore-appLG#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "pg-promise": "^5.3.1",
     "pug": "^2.0.0-beta5"

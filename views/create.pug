@@ -1,0 +1,9 @@
+include index.pug
+  h1 Create a new book entry
+  form(method="post" action="/books")
+    fieldset
+      label
+        span Title:
+        input(name="book[title]" type="text" value="")
+    div
+      input(type="submit" value="Create Book")

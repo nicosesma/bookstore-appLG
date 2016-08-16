@@ -1,16 +1,16 @@
 promises
 
-
-const createBook = function(bookAttributes){
-  // unknown blackbox async functionality
-  return promise;
-}
-
-
-const createAuthor = function(){
-
-};
-const createGenre = function(){
+//
+// const createBook = function(bookAttributes){
+//   // unknown blackbox async functionality
+//   return promise;
+// }
+//
+//
+// const createAuthor = function(){
+//
+// };
+// const createGenre = function(){
 
 };
 //

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    link(rel="stylesheet" href="/style.css" media="all")
+    block title
+      title Bookstore
+  body
+    nav
+      ul.inline-list
+        li
+          strong
+            a(href="/") Bookstore
+        li
+          a(href="/books") All Book
+        li
+          a(href="/books/new") New Book
+        li
+          form(method="get" action="/search")
+            input(type="search" name="search_query" placeholder="search...")
+    block content

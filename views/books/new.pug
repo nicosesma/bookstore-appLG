@@ -1,0 +1,19 @@
+extends ../layout.pug
+
+block content
+  h1 Create a new book
+  form(method="post" action="/books")
+    fieldset
+      label
+        span Title:
+        input(name="book[title]" type="text" value="")
+    fieldset
+      label
+        span Published At:
+        input(name="book[published_at]" type="date" value="")
+    fieldset
+      label
+        span Fiction?
+        input(name="book[fiction]" type="checkbox" value="true")
+    div
+      input(type="submit" value="Create Book")

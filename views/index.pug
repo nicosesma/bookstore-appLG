@@ -1,7 +1,13 @@
-html
-  head
-  body
-    h1 Homepage
-    a(href='/search') Search
-    a(href='/books/new') New Entry
-  yield
+extends ./layout.pug
+
+block content
+  h1 Homepage
+  ul
+    li
+      a(href='/books') All Books
+    li
+      a(href='/books/new') Add a Books
+    li
+      a(href='/search') Search
+    li
+      a(href='/books/new') New Entry

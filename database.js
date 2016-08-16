@@ -7,9 +7,13 @@ const getAllBooks = function() {
   return db.any('SELECT * FROM books')
 }
 
+const getAllGenres = function() {
+  return db.any('SELECT * FROM genres')
+}
+
 
 const getBookById = function(id){
-  return db.any('SELECT * FROM books WHERE id=$1', [id])
+  return db.one('SELECT * FROM books WHERE id=$1', [id])
 }
 
 const getBooksWhereAuthorNameLike = function(authorNamePart){
@@ -32,6 +36,65 @@ const getBooksWhereAuthorNameLike = function(authorNamePart){
   return db.any(sql, [`%${authorNamePart}%`])
 }
 
+const createBook = function(attributes){
+  const sql = `
+  INSERT INTO
+    books (title, published_at, fiction)
+  VALUES
+    ($1, $2, $3)
+  RETURNING
+    *
+  `
+  return db.one(sql, [
+    attributes.title,
+    attributes.published_at,
+    attributes.fiction,
+  ])
+}
+
+const searchForBooks = function(options){
+  let variables = []
+  let sql  = `
+    SELECT
+      *
+    FROM
+      books
+  `
+  let whereConditions = []
+  if (options.genres) {
+    let genres = Array.isArray(options.genres) ?
+      options.genres : [options.genres]
+    sql += `
+      JOIN
+        book_genres
+      ON
+        book_genres.book_id=books.id
+    `
+    variables.push(genres)
+    whereConditions.push(`
+      book_genres.genre_id IN ($${variables.length}:csv)
+    `)
+  }
+
+  if (options.search_query) {
+    variables.push(options.search_query
+      .toLowerCase()
+      .replace(/^ */, '%')
+      .replace(/ *$/, '%')
+      .replace(/ +/g, '%')
+    )
+    whereConditions.push(`
+      LOWER(books.title) LIKE $${variables.length}
+    `)
+
+  }
+
+  if (whereConditions.length > 0) {
+    sql += ' WHERE '+whereConditions.join(' AND ')
+  }
+
+  return db.any(sql, variables)
+}
 
 module.exports = {
   pgp: pgp,
@@ -39,4 +102,7 @@ module.exports = {
   getBookById: getBookById,
   getBooksWhereAuthorNameLike: getBooksWhereAuthorNameLike,
   getAllBooks: getAllBooks,
+  getAllGenres: getAllGenres,
+  createBook: createBook,
+  searchForBooks: searchForBooks,
 }

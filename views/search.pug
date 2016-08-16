@@ -1,14 +1,36 @@
-include index.pug
-    h1 Search
-    h2 Our Books!
+extends ./layout.pug
 
-    table
-      thead
+block content
+  h1 Search
+  h2 Our Books!
+
+  a(href='/books/new') New Book
+
+  form(method="get" action="/search")
+    div
+      input(type="search" name="search_query" placeholder="search...")
+    div
+      label
+        span Fiction?
+        input(type="checkbox" name="fiction")
+
+    div
+      label
+        span Genres:
+        select(name="genres" multiple)
+          for genre in genres
+            option(value=genre.id)= genre.name
+
+    div
+      input(type="submit" value="Search")
+  table
+    thead
+      tr
+        th ID
+        th Title
+    tbody
+      for book in books
         tr
-          th ID
-          th Title
-      tbody
-        for book in books
-          tr
-            td= book.id
-            td= book.title
+          td= book.id
+          td
+            a(href="/books/"+book.id)= book.title

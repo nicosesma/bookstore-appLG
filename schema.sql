@@ -142,4 +142,4 @@ JOIN
 ON
   authors.id = book_authors.author_id
 WHERE
-  authors.name='Adam';
+  authors.name='Adam Smith';

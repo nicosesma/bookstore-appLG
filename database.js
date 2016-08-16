@@ -37,24 +37,23 @@ const getBooksWhereAuthorNameLike = function(authorNamePart){
 }
 
 const getBookAuthors = function(bookId){
-  console.log(getBookById(bookId));
-  // const sql = `
-  //   SELECT
-  //     authors.*
-  //   FROM
-  //     authors
-  //   JOIN
-  //     book_authors
-  //   ON
-  //     books.id = book_authors.book_id
-  //   JOIN
-  //     books
-  //   ON
-  //     books.id = book_authors.book_id
-  //   WHERE
-  //     books.id LIKE bookId=$1;
-  // `
-  return db.one([getBookById(bookId)])
+  const sql = `
+    SELECT
+      authors.name
+    FROM
+      authors
+    JOIN
+      book_authors
+    ON
+      authors.id = book_authors.author_id
+    JOIN
+      books
+    ON
+      books.id = book_authors.book_id
+    WHERE
+      books.id = $1;
+  `
+  return db.any(sql, [bookId])
 }
 
 const createBook = function(attributes){

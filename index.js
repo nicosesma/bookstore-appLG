@@ -70,7 +70,6 @@ app.get('/books/:bookId', function (req, res) {
   database.getBookById(req.params.bookId)
     .catch(renderError)
     .then(function(book){
-
       if(book.fiction){
         book.fiction = 'Fiction'
       } else {
@@ -83,6 +82,30 @@ app.get('/books/:bookId', function (req, res) {
     })
     .catch(renderError)
 });
+
+// app.get('/books/:bookId', function (req, res) {
+//   Promise.all([
+//     database.getBookAuthors(req.params.bookId),
+//     database.getBookById(req.params.bookId)
+//   ])
+//     .catch(renderError)
+//     .then(function(data){
+//       const author = data[0];
+//       const book = data[1];
+//       if(book.fiction){
+//         book.fiction = 'Fiction'
+//       } else {
+//         book.fiction = 'Non-Fiction'
+//       }
+//
+//       res.render('books/show',{
+//         authors: authors,
+//         book: book
+//       });
+//     })
+//     .catch(renderError)
+// });
+
 
 app.post('/books', function(req, res){
   const book = req.body.book

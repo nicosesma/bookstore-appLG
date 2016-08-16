@@ -143,3 +143,19 @@ ON
   authors.id = book_authors.author_id
 WHERE
   authors.name='Adam Smith';
+
+--scratch
+-- SELECT
+--  authors.name
+-- FROM
+--  authors
+-- JOIN
+--  book_authors
+-- ON
+--  authors.id = book_authors.author_id
+-- JOIN
+--  books
+-- ON
+--  books.id = book_authors.book_id
+-- WHERE
+--  books.id = 3;

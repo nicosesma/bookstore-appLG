@@ -60,9 +60,7 @@ app.get('/books', function (req, res) {
     .catch(function(error){
       throw error
     })
-
 });
-
 
 app.get('/books/new', function (req, res) {
   res.render('books/new');
@@ -72,6 +70,13 @@ app.get('/books/:bookId', function (req, res) {
   database.getBookById(req.params.bookId)
     .catch(renderError)
     .then(function(book){
+
+      if(book.fiction){
+        book.fiction = 'Fiction'
+      } else {
+        book.fiction = 'Non-Fiction'
+      }
+
       res.render('books/show',{
         book: book
       });

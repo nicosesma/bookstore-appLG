@@ -36,6 +36,27 @@ const getBooksWhereAuthorNameLike = function(authorNamePart){
   return db.any(sql, [`%${authorNamePart}%`])
 }
 
+const getBookAuthors = function(bookId){
+  console.log(getBookById(bookId));
+  // const sql = `
+  //   SELECT
+  //     authors.*
+  //   FROM
+  //     authors
+  //   JOIN
+  //     book_authors
+  //   ON
+  //     books.id = book_authors.book_id
+  //   JOIN
+  //     books
+  //   ON
+  //     books.id = book_authors.book_id
+  //   WHERE
+  //     books.id LIKE bookId=$1;
+  // `
+  return db.one([getBookById(bookId)])
+}
+
 const createBook = function(attributes){
   const sql = `
   INSERT INTO
@@ -105,4 +126,5 @@ module.exports = {
   getAllGenres: getAllGenres,
   createBook: createBook,
   searchForBooks: searchForBooks,
+  getBookAuthors: getBookAuthors,
 }

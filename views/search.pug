@@ -1,0 +1,14 @@
+include index.pug
+    h1 Search
+    h2 Our Books!
+
+    table
+      thead
+        tr
+          th ID
+          th Title
+      tbody
+        for book in books
+          tr
+            td= book.id
+            td= book.title

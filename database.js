@@ -3,6 +3,10 @@ const pgp = require('pg-promise')();
 const db = pgp(connectionString);
 
 
+const getAllBooks = function() {
+  return db.any('SELECT * FROM books')
+}
+
 
 const getBookById = function(id){
   return db.any('SELECT * FROM books WHERE id=$1', [id])
@@ -34,4 +38,5 @@ module.exports = {
   db: db,
   getBookById: getBookById,
   getBooksWhereAuthorNameLike: getBooksWhereAuthorNameLike,
+  getAllBooks: getAllBooks,
 }

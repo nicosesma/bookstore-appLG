@@ -1,7 +1,19 @@
-const connectionString = `postgres://${process.env.USER}@localhost:5432/bookstore`
+const databaseName = process.env.NODE_ENV === 'test' ? 'bookstore-test' : 'bookstore'
+const connectionString = `postgres://${process.env.USER}@localhost:5432/${databaseName}`
 const pgp = require('pg-promise')();
 const db = pgp(connectionString);
 
+
+const truncateAllTables = function(){
+  return db.none(`
+    TRUNCATE 
+      books, 
+      genres, 
+      authors,
+      book_genres,
+      book_authors
+  `)
+}
 
 const getAllBooks = function() {
   return db.any('SELECT * FROM books')
@@ -46,14 +58,25 @@ const getBookAuthors = function(bookId){
       book_authors
     ON
       authors.id = book_authors.author_id
-    JOIN
-      books
-    ON
-      books.id = book_authors.book_id
     WHERE
-      books.id = $1;
+      book_authors.book_id = $1;
   `
   return db.any(sql, [bookId])
+}
+
+const getBookAndAuthorsAndGenresByBookId = function(bookId){
+
+  // get the book for bookId X
+  // get the authors for bookId X
+  // get the genres for bookId X
+
+  // when we get all that data
+    // books.authors = authors
+    // books.genres = genres
+    // return book
+
+
+
 }
 
 const createBook = function(attributes){
@@ -119,6 +142,7 @@ const searchForBooks = function(options){
 module.exports = {
   pgp: pgp,
   db: db,
+  truncateAllTables: truncateAllTables,
   getBookById: getBookById,
   getBooksWhereAuthorNameLike: getBooksWhereAuthorNameLike,
   getAllBooks: getAllBooks,

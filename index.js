@@ -68,12 +68,13 @@ app.get('/books/new', function (req, res) {
 
 app.get('/books/:bookId', function (req, res) {
   // database.getBookById(req.params.bookId)
-  database.getBookAndAuthorsAndGenresByBookId(req.params.bookId)
+  database.getBookAuthors(req.params.bookId)
     .catch(renderError)
     .then(function(book){
       res.render('books/show',{
         book: book
       });
+      console.log('book: ', book)
     })
     .catch(renderError)
 });

@@ -6,9 +6,9 @@ const db = pgp(connectionString);
 
 const truncateAllTables = function(){
   return db.none(`
-    TRUNCATE 
-      books, 
-      genres, 
+    TRUNCATE
+      books,
+      genres,
       authors,
       book_genres,
       book_authors
@@ -65,7 +65,6 @@ const getBookAuthors = function(bookId){
 }
 
 const getBookAndAuthorsAndGenresByBookId = function(bookId){
-
   // get the book for bookId X
   // get the authors for bookId X
   // get the genres for bookId X
@@ -74,8 +73,15 @@ const getBookAndAuthorsAndGenresByBookId = function(bookId){
     // books.authors = authors
     // books.genres = genres
     // return book
-
-
+  Promise.all([
+    getBookById(bookId)
+  ])
+    .catch(console.log('error'))
+    .then(function(book){
+      book: book
+    })
+    .catch(console.log('error'))
+  return db.any(bookId)
 
 }
 
@@ -150,4 +156,5 @@ module.exports = {
   createBook: createBook,
   searchForBooks: searchForBooks,
   getBookAuthors: getBookAuthors,
+  getBookAndAuthorsAndGenresByBookId: getBookAndAuthorsAndGenresByBookId,
 }

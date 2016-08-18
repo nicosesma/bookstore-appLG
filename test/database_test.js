@@ -63,6 +63,18 @@ describe('database', function() {
       })
     })
 
+    describe('#createAuthor', function() {
+
+      it('should add an Author to authors table', function() {
+        const author1 = {name: 'Bob Dole'}
+        return database.createAuthor(author1)
+          .then(authorName =>{
+            expect(authorName.id).not.to.be(undefined)
+            expect(authorName.name).to.eql('Bob Dole')
+          })
+      })
+    })
+
   });
 
 });

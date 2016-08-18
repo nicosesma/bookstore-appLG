@@ -101,6 +101,18 @@ const getBookAndAuthorsAndGenresByBookId = function(bookId){
     })
 }
 
+const createAuthor = function(name){
+  const sql = `
+  INSERT INTO
+    authors (name)
+  VALUES
+    ($1)
+  RETURNING
+    *
+  `
+  return db.one(sql, [name.name])
+}
+
 const createBook = function(attributes){
   const sql = `
   INSERT INTO
@@ -176,7 +188,7 @@ const searchForBooks = function(options){
     sql += ' WHERE '+whereConditions.join(' AND ')
   }
 
-  console.log('SQL --->', sql, variables)
+  // console.log('SQL --->', sql, variables)
   return db.any(sql, variables)
 }
 
@@ -192,4 +204,5 @@ module.exports = {
   searchForBooks: searchForBooks,
   getBookAuthors: getBookAuthors,
   getBookAndAuthorsAndGenresByBookId: getBookAndAuthorsAndGenresByBookId,
+  createAuthor: createAuthor,
 }

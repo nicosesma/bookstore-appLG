@@ -36,7 +36,7 @@ const renderError = function(res){
 
 app.get('/search', function (req, res) {
   const searchOptions = req.query
-  console.log(JSON.stringify(searchOptions, null, 4))
+  // console.log(JSON.stringify(searchOptions, null, 4))
   if (!('genres' in searchOptions))
     searchOptions.genres = []
   if (!Array.isArray(searchOptions.genres))

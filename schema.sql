@@ -159,3 +159,11 @@ WHERE
 --  books.id = book_authors.book_id
 -- WHERE
 --  books.id = 3;
+
+
+INSERT INTO
+  authors (name)
+VALUES
+  ('Bob Dole')
+RETURNING
+  *;

@@ -161,9 +161,9 @@ WHERE
 --  books.id = 3;
 
 
-INSERT INTO
-  authors (name)
-VALUES
-  ('Bob Dole')
-RETURNING
-  *;
+-- INSERT INTO
+--   authors (name)
+-- VALUES
+--   ('Bob Dole')
+-- RETURNING
+--   *;

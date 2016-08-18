@@ -25,25 +25,37 @@ app.get('/', function (req, res) {
 // POST /admin/books/:bookID        // UPDATE book show page
 // POST /admin/books/:bookID/delete // DELETE
 
-const renderError = function(error){
-  res.status(500).render('error',{
-    error: error
-  })
-  throw error
+const renderError = function(res){
+  return function(error){
+    res.status(500).render('error',{
+      error: error
+    })
+    throw error
+  }
 }
 
 app.get('/search', function (req, res) {
+  const searchOptions = req.query
+  console.log(JSON.stringify(searchOptions, null, 4))
+  if (!('genres' in searchOptions))
+    searchOptions.genres = []
+  if (!Array.isArray(searchOptions.genres))
+    searchOptions.genres = [searchOptions.genres]
+
+  if (!('fiction' in searchOptions)) searchOptions.fiction = ''
+
   Promise.all([
     database.getAllGenres(),
-    database.searchForBooks(req.query)
+    database.searchForBooks(searchOptions)
   ])
-    .catch(renderError)
+    .catch(renderError(res))
     .then(function(data){
       const genres = data[0];
       const books = data[1];
       res.render('search', {
         genres: genres,
-        books: books
+        books: books,
+        searchOptions: searchOptions
       })
     })
 });
@@ -51,7 +63,7 @@ app.get('/search', function (req, res) {
 
 app.get('/books', function (req, res) {
   database.getAllBooks()
-    .catch(renderError)
+    .catch(renderError(res))
     .then(function(books){
       res.render('books/index', {
         books: books
@@ -68,15 +80,15 @@ app.get('/books/new', function (req, res) {
 
 app.get('/books/:bookId', function (req, res) {
   // database.getBookById(req.params.bookId)
-  database.getBookAuthors(req.params.bookId)
-    .catch(renderError)
+  database.getBookAndAuthorsAndGenresByBookId(req.params.bookId)
+    .catch(renderError(res))
     .then(function(book){
       res.render('books/show',{
         book: book
       });
       console.log('book: ', book)
     })
-    .catch(renderError)
+    .catch(renderError(res))
 });
 
 // app.get('/books/:bookId', function (req, res) {
@@ -84,7 +96,7 @@ app.get('/books/:bookId', function (req, res) {
 //     database.getBookAuthors(req.params.bookId),
 //     database.getBookById(req.params.bookId)
 //   ])
-//     .catch(renderError)
+//     .catch(renderError(res))
 //     .then(function(data){
 //       const author = data[0];
 //       const book = data[1];
@@ -99,7 +111,7 @@ app.get('/books/:bookId', function (req, res) {
 //         book: book
 //       });
 //     })
-//     .catch(renderError)
+//     .catch(renderError(res))
 // });
 
 

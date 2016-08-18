@@ -4,22 +4,30 @@ block content
   h1 Search
   h2 Our Books!
 
+  pre=JSON.stringify(searchOptions, null, 4)
+
   a(href='/books/new') New Book
 
   form(method="get" action="/search")
     div
-      input(type="search" name="search_query" placeholder="search...")
+      input(type="search" name="search_query" placeholder="search..." value=searchOptions.search_query)
     div
       label
-        span Fiction?
-        input(type="checkbox" name="fiction")
+        span fiction
+        input(type="radio" name="fiction" value="true"  checked=searchOptions.fiction==='true')
+      label
+        span non-fiction
+        input(type="radio" name="fiction" value="false" checked=searchOptions.fiction==='false')
+      label
+        span either
+        input(type="radio" name="fiction" value=""      checked=searchOptions.fiction==='')
 
     div
       label
         span Genres:
         select(name="genres" multiple)
           for genre in genres
-            option(value=genre.id)= genre.name
+            option(value=genre.id selected=searchOptions.genres.includes(genre.id+''))= genre.name
 
     div
       input(type="submit" value="Search")

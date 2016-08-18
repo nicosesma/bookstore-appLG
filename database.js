@@ -64,25 +64,41 @@ const getBookAuthors = function(bookId){
   return db.any(sql, [bookId])
 }
 
+const getBookGenres = function(bookId){
+  const sql = `
+    SELECT
+      genres.name
+    FROM
+      genres
+    JOIN
+      book_genres
+    ON
+      genres.id = book_genres.genre_id
+    WHERE
+      book_genres.book_id = $1;
+  `
+  return db.any(sql, [bookId])
+}
+
 const getBookAndAuthorsAndGenresByBookId = function(bookId){
-  // get the book for bookId X
-  // get the authors for bookId X
-  // get the genres for bookId X
-
-  // when we get all that data
-    // books.authors = authors
-    // books.genres = genres
-    // return book
-  Promise.all([
-    getBookById(bookId)
+  return Promise.all([
+    getBookById(bookId),
+    getBookAuthors(bookId),
+    getBookGenres(bookId),
   ])
-    .catch(console.log('error'))
-    .then(function(book){
-      book: book
+    .catch(function(error){
+      console.log(error)
+      throw error;
     })
-    .catch(console.log('error'))
-  return db.any(bookId)
+    .then(function(results){
+      const book = results[0]
+      const authors = results[1]
+      const genres = results[2]
 
+      book.authors = authors
+      book.genres = genres
+      return book;
+    })
 }
 
 const createBook = function(attributes){
@@ -110,22 +126,36 @@ const searchForBooks = function(options){
       books
   `
   let whereConditions = []
-  if (options.genres) {
-    let genres = Array.isArray(options.genres) ?
-      options.genres : [options.genres]
+  if (options.fiction !== '') {
+    variables.push(options.fiction === 'true')
+    whereConditions.push(`
+      books.fiction IS $${variables.length}
+    `)
+  }
+  if (options.genres.length > 0) {
     sql += `
       JOIN
         book_genres
       ON
         book_genres.book_id=books.id
     `
-    variables.push(genres)
+    variables.push(options.genres)
     whereConditions.push(`
       book_genres.genre_id IN ($${variables.length}:csv)
     `)
   }
 
   if (options.search_query) {
+    sql += `
+      JOIN
+        book_authors
+      ON
+        book_authors.book_id=books.id
+      JOIN
+        authors
+      ON
+        authors.id=book_authors.author_id
+    `
     variables.push(options.search_query
       .toLowerCase()
       .replace(/^ */, '%')
@@ -133,7 +163,11 @@ const searchForBooks = function(options){
       .replace(/ +/g, '%')
     )
     whereConditions.push(`
-      LOWER(books.title) LIKE $${variables.length}
+      (
+        LOWER(books.title) LIKE $${variables.length}
+      OR
+        LOWER(authors.name) LIKE $${variables.length}
+      )
     `)
 
   }
@@ -142,6 +176,7 @@ const searchForBooks = function(options){
     sql += ' WHERE '+whereConditions.join(' AND ')
   }
 
+  console.log('SQL --->', sql, variables)
   return db.any(sql, variables)
 }
 

@@ -15,5 +15,9 @@ block content
       label
         span Fiction?
         input(name="book[fiction]" type="checkbox" value="true")
+    fieldset
+      label
+        span Author:
+        input(name="book[authors][0][name]" type="text" value="")
     div
       input(type="submit" value="Create Book")

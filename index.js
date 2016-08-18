@@ -124,7 +124,7 @@ app.post('/books', function(req, res){
   book.fiction = 'fiction' in book;
   database.createBook(book)
     .then(function(book){
-      res.redirect('/books/'+book.id)
+      res.redirect(`/books/${book}`)
     })
     .catch(function(error){
       console.log(error)

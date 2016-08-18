@@ -115,6 +115,20 @@ const createAuthor = function(name){
   return db.one(sql, [name.name])
 }
 
+const associateAuthorsWithBook = function(authorIds, bookId){
+  authorIds = Array.isArray(authorIds) ? authorIds : [authorIds]
+  let queries = authorIds.map(authorId => {
+    const sql = `
+      INSERT INTO
+        book_authors(book_id, author_id)
+      VALUES
+        ($1, $2)
+    `
+    return db.none(sql, [bookId, authorId])
+  })
+  return Promise.all(queries)
+}
+
 const createBook = function(attributes){
   const sql = `
   INSERT INTO
@@ -124,11 +138,26 @@ const createBook = function(attributes){
   RETURNING
     *
   `
-  return db.one(sql, [
-    attributes.title,
-    attributes.published_at,
-    attributes.fiction,
-  ])
+  let queries = [
+    db.one(sql, [
+      attributes.title,
+      attributes.published_at,
+      attributes.fiction,
+    ])
+  ]
+  attributes.authors.forEach(author =>
+    queries.push(createAuthor(author))
+  )
+  return Promise.all(queries)
+    .then(authorIds => {
+      authorIds = authorIds.map(x => x.id)
+      const bookId = authorIds.shift()
+      return Promise.all([
+        associateAuthorsWithBook(authorIds, bookId)
+      ]).then(function(){
+        return bookId;
+      })
+    })
 }
 
 const searchForBooks = function(options){
@@ -190,7 +219,7 @@ const searchForBooks = function(options){
     sql += ' WHERE '+whereConditions.join(' AND ')
   }
 
-  // console.log('SQL --->', sql, variables)
+  console.log('SQL --->', sql, variables)
   return db.any(sql, variables)
 }
 

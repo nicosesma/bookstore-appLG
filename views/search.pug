@@ -42,3 +42,8 @@ block content
           td= book.id
           td
             a(href="/books/"+book.id)= book.title
+
+  div
+    if page > 1
+      a(href="/books?page="+(page-1)) Previous
+    a(href="/books?page="+(page+1)) Next

@@ -62,10 +62,14 @@ app.get('/search', function (req, res) {
 
 
 app.get('/books', function (req, res) {
-  database.getAllBooks()
+  let page = parseInt(req.query.page, 10);
+  if (isNaN(page)) page = 1;
+
+  database.getAllBooks(page)
     .catch(renderError(res))
     .then(function(books){
       res.render('books/index', {
+        page: page,
         books: books
       })
     })

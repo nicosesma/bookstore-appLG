@@ -15,8 +15,10 @@ const truncateAllTables = function(){
   `)
 }
 
-const getAllBooks = function() {
-  return db.any('SELECT * FROM books')
+const getAllBooks = function(page) {
+  const offset = (page-1) * 10;
+  console.log("select * FROM books LIMIT 10 OFFSET " + offset)
+  return db.any('SELECT * FROM books LIMIT 10 OFFSET $1', [offset])
 }
 
 const getAllGenres = function() {

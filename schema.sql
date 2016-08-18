@@ -43,7 +43,16 @@ INSERT INTO
 VALUES
   ('Wealth of Nations', now(), false),
   ('White Fang', now(), true),
-  ('Tale of Two Cities', now(), true);
+  ('Tale of Two Cities', now(), true),
+  ('Hitchhikers Guide to the Galaxy', now(), true),
+  ('The Lord of the Rings', now(), true),
+  ('The Theory of Money', now(), false),
+  ('1984', now(), true),
+  ('The Grapes of Wrath', now(), true),
+  ('To Kill a Mockingbird', now(), true),
+  ('Lord of the Flies', now(), true),
+  ('The Hobbit', now(), true),
+  ('The Great Gatsby', now(), true);
 
 
 INSERT INTO

@@ -1,0 +1,29 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "Create a simple content management system for an online bookstore",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicosesma/bookstore-appLG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicosesma/bookstore-appLG/issues"
+  },
+  "homepage": "https://github.com/nicosesma/bookstore-appLG#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "expect.js": "^0.3.1",
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "nodemon": "^1.10.2",
+    "pg-promise": "^5.3.1",
+    "pug": "^2.0.0-beta5"
+  }
+}

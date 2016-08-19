@@ -1,0 +1,7 @@
+select#book-genres{
+  min-height: 125px;
+}
+
+.search-form{
+  font-size: 2em;
+}

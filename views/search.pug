@@ -1,0 +1,41 @@
+extends ./layout.pug
+
+block content
+  h1 Search
+
+  form.search-form(method="get" action="/search")
+    div
+      input(type="search" name="search_query" placeholder="search..." value=searchOptions.search_query)
+    div
+      label
+        span fiction
+        input(type="radio" name="fiction" value="true"  checked=searchOptions.fiction==='true')
+        span &nbsp;
+      label
+        span non-fiction
+        input(type="radio" name="fiction" value="false" checked=searchOptions.fiction==='false')
+        span &nbsp;
+      label
+        span either
+        input(type="radio" name="fiction" value=""      checked=searchOptions.fiction==='')
+        span &nbsp;
+
+    div
+      label
+        span Genres:
+        select(name="genres" multiple)
+          for genre in genres
+            option(value=genre.id selected=searchOptions.genres.includes(genre.id+''))= genre.name
+
+    div
+      input(type="submit" value="Search")
+
+  table.table.table-striped
+    thead
+      tr
+        th Title
+    tbody
+      for book in books
+        tr
+          td
+            a(href="/books/"+book.id)= book.title

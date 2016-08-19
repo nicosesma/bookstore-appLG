@@ -1,0 +1,17 @@
+extends ../layout.pug
+
+block content
+  h1= book.title
+  h4= 'Published on ' + book.published_at
+  h4= book.fiction ? 'Fiction' : 'Non-Fiction'
+
+
+  h2 Authors
+  ol
+    for author in book.authors
+      li= author.name
+
+  h2 Genres
+  ol
+    for genre in book.genres
+      li= genre.name

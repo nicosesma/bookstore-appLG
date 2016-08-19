@@ -1,6 +1,6 @@
 ## Description
 
-Create a simple content management system that allows users to add, delete, or update books.  Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre). 
+Create a simple content management system that allows users to add, delete, or update books.  Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre).
 
 ## Context
 
@@ -12,28 +12,28 @@ Creating this web application will provide exposure to:
 
 ## Specifications
 
-- [ ] Any user can add books into the system via an admin page
-- [ ] Books entered in the system are listed on the home page, in pages of 10
-- [ ] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
-- [ ] Users can view book details on a book detail page, linked to from the listing or search pages
-- [ ] All code submissions are peer reviewed via GitHub PR by at least two members of the team, and master is always in a stable state (tests passed, site functions)
+- [X] Any user can add books into the system via an admin page
+- [X] Books entered in the system are listed on the home page, in pages of 10
+- [X] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
+- [X] Users can view book details on a book detail page, linked to from the listing or search pages
+- [X] All code submissions are peer reviewed via GitHub PR by at least two members of the team, and master is always in a stable state (tests passed, site functions)
 
 ### Required
 
-- [ ] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
+- [X] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
 
 ## Quality Rubric
-- [ ] User-Friendly - Pages load fast, styled enough to not offend the eye
-- [ ] Tested - All specs passing
-- [ ] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
-- [ ] Functional - Project runs in localhost
-- [ ] Structured - Directory structure allows new developers to quickly find and add files
-- [ ] Clearly Named - Functions, variables, files, CSS classes and ids
-- [ ] Abstracted - Small, single-responsibility functions leveraged for encapsulation & reusability
-- [ ] Git Logged - Readable and clean with clear, complete, professional commit messages
-- [ ] Linted - Gets no unexpected errors from jshint linter
+- [X] User-Friendly - Pages load fast, styled enough to not offend the eye
+- [X] Tested - All specs passing
+- [X] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
+- [X] Functional - Project runs in localhost
+- [X] Structured - Directory structure allows new developers to quickly find and add files
+- [X] Clearly Named - Functions, variables, files, CSS classes and ids
+- [X] Abstracted - Small, single-responsibility functions leveraged for encapsulation & reusability
+- [X] Git Logged - Readable and clean with clear, complete, professional commit messages
+- [X] Linted - Gets no unexpected errors from jshint linter
 - [ ] Reviewed - Passes [3.0 GPA] CodeClimate or peer code review
-- [ ] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
+- [X] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
 
 ---
 

@@ -1,26 +1,7 @@
-/** {
-
-}
-
-html, body{
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-
-.inline-list{
-  list-stlye: none;
-
-}
-.inline-list > li {
-  display: inline-block;
-  margin-right: 1em;
-}*/
-
-
-
 select#book-genres{
   min-height: 125px;
+}
+
+.search-form{
+  font-size: 2em;
 }

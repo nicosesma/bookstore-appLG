@@ -2,25 +2,23 @@ extends ./layout.pug
 
 block content
   h1 Search
-  h2 Our Books!
 
-  //- pre=JSON.stringify(searchOptions, null, 4)
-
-  a(href='/books/new') New Book
-
-  form(method="get" action="/search")
+  form.search-form(method="get" action="/search")
     div
       input(type="search" name="search_query" placeholder="search..." value=searchOptions.search_query)
     div
       label
         span fiction
         input(type="radio" name="fiction" value="true"  checked=searchOptions.fiction==='true')
+        span &nbsp;
       label
         span non-fiction
         input(type="radio" name="fiction" value="false" checked=searchOptions.fiction==='false')
+        span &nbsp;
       label
         span either
         input(type="radio" name="fiction" value=""      checked=searchOptions.fiction==='')
+        span &nbsp;
 
     div
       label
@@ -32,19 +30,12 @@ block content
     div
       input(type="submit" value="Search")
 
-  table
+  table.table.table-striped
     thead
       tr
-        th ID
         th Title
     tbody
       for book in books
         tr
-          td= book.id
           td
             a(href="/books/"+book.id)= book.title
-
-  div
-    if page > 1
-      a(href="/books?page="+(page-1)) Previous
-    a(href="/books?page="+(page+1)) Next

@@ -11,19 +11,21 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', function (req, res) {
-  res.render('../views/index.pug');
-});
+  let page = parseInt(req.query.page, 10);
+  if (isNaN(page)) page = 1;
 
-// GET  /                     // homepage
-// GET  /books                // INDEX books index page
-// GET  /books/:bookID        // SHOW book show page
-//
-//
-// GET  /admin/books/new            // NEW new book form page
-// POST /admin/books                // CREATE new book form page
-// GET  /admin/books/:bookID/edit   // EDIT book show page
-// POST /admin/books/:bookID        // UPDATE book show page
-// POST /admin/books/:bookID/delete // DELETE
+  database.getAllBooks(page)
+    .catch(renderError(res))
+    .then(function(books){
+      res.render('books/index', {
+        page: page,
+        books: books
+      })
+    })
+    .catch(function(error){
+      throw error
+    })
+});
 
 const renderError = function(res){
   return function(error){
@@ -100,29 +102,6 @@ app.get('/books/:bookId', function (req, res) {
     })
     .catch(renderError(res))
 });
-
-// app.get('/books/:bookId', function (req, res) {
-//   Promise.all([
-//     database.getBookAuthors(req.params.bookId),
-//     database.getBookById(req.params.bookId)
-//   ])
-//     .catch(renderError(res))
-//     .then(function(data){
-//       const author = data[0];
-//       const book = data[1];
-//       if(book.fiction){
-//         book.fiction = 'Fiction'
-//       } else {
-//         book.fiction = 'Non-Fiction'
-//       }
-//
-//       res.render('books/show',{
-//         authors: authors,
-//         book: book
-//       });
-//     })
-//     .catch(renderError(res))
-// });
 
 
 app.post('/books', function(req, res){

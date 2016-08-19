@@ -3,27 +3,23 @@ extends ../layout.pug
 block content
   h1 Create a new book
   form(method="post" action="/books")
-    fieldset
+    .form-group
+      label(for="book-title") Title:
+      input.form-control(id="book-title" name="book[title]" type="text" value="")
+    .form-group
+      label(for="book-published") Published At:
+      input.form-control(id="book-published" name="book[published_at]" type="date" value="")
+    .form-group
       label
-        span Title:
-        input(name="book[title]" type="text" value="")
-    fieldset
-      label
-        span Published At:
-        input(name="book[published_at]" type="date" value="")
-    fieldset
-      label
-        span Fiction?
-        input(name="book[fiction]" type="checkbox" value="true")
-    fieldset
-      label
-        span Author:
-        input(name="book[authors][0][name]" type="text" value="")
-    fieldset
-      label
-        span Genres:
-        select(name="book[genres]" multiple)
+        span Fiction?  &nbsp; 
+        input(id="book-fiction" name="book[fiction]" type="checkbox" value="true")
+    .form-group
+      label(for="book-author") Author:
+      input.form-control(id="book-author" name="book[authors][0][name]" type="text" value="")
+    .form-group
+      label(for="book-genres") Genres:
+      select.form-control(id="book-genres" name="book[genres]" multiple)
           for genre in genres
             option(value=genre.id)= genre.name
     div
-      input(type="submit" value="Create Book")
+      input.form-control(type="submit" value="Create Book")

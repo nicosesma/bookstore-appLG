@@ -19,7 +19,59 @@ const getAllBooks = function(page) {
   const offset = (page-1) * 10;
   console.log("select * FROM books LIMIT 10 OFFSET " + offset)
   return db.any('SELECT * FROM books LIMIT 10 OFFSET $1', [offset])
+    .then(loadAuthorsAndGenresForBooks)
 }
+
+const loadAuthorsAndGenresForBooks = function(books){
+  const bookIds = books.map(book => book.id)
+  return Promise.all([
+    loadAuthorsForBookIds(bookIds),
+    loadGenresForBookIds(bookIds),
+  ]).then(results => {
+    const authors = results[0]
+    const genres = results[1]
+    books.forEach(book => {
+      book.authors = authors.filter(author => author.book_id === book.id)
+      book.genres = genres.filter(genre => genre.book_id === book.id)
+    })
+    return books;
+  })
+}
+
+const loadAuthorsForBookIds = function(bookIds){
+  const sql = `
+    SELECT
+      authors.*,
+      book_authors.book_id
+    FROM
+      authors
+    JOIN
+      book_authors
+    ON
+      book_authors.author_id = authors.id
+    WHERE
+      book_authors.book_id IN ($1:csv)
+  `
+  return db.any(sql, [bookIds])
+}
+
+const loadGenresForBookIds = function(bookIds){
+  const sql = `
+  SELECT
+    genres.*,
+    book_genres.book_id
+  FROM
+    genres
+  JOIN
+    book_genres
+  ON
+    book_genres.genre_id = genres.id
+  WHERE
+    book_genres.book_id IN ($1:csv)
+  `
+  return db.any(sql, [bookIds])
+}
+
 
 const getAllGenres = function() {
   return db.any('SELECT * FROM genres')

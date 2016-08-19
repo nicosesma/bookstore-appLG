@@ -3,18 +3,31 @@ extends ../layout.pug
 block content
 
   h1 All Books
-  table
+  .clearfix
+    if page > 1
+      a(href="/books?page="+(page-1)) Previous
+    a.pull-right(href="/books?page="+(page+1)) Next
+
+  table.table.table-striped
     thead
       tr
-        th ID
         th Title
+        th Authors
+        th Genres
     tbody
       for book in books
         tr
-          td= book.id
           td
             a(href="/books/"+book.id)= book.title
-  div
+          td
+            for author in book.authors
+              a(href="/authors/"+author.id)= author.name
+              span &nbsp;
+          td
+            for genre in book.genres
+              a(href="/genres/"+genre.id)= genre.name
+              span &nbsp;
+  .clearfix
     if page > 1
       a(href="/books?page="+(page-1)) Previous
-    a(href="/books?page="+(page+1)) Next
+    a.pull-right(href="/books?page="+(page+1)) Next

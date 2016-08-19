@@ -9,7 +9,7 @@ To run on a local machine, follow these instructions:
 * Create your database: ```createdb bookstore```
 * Load SQL into your database: ```psql bookstore < schema.sql```
 * Run your localhost: ```nodemon```
-* Head to the (homepage!)[http://0.0.0.0:3000/]
+* Head to the [homepage!](http://0.0.0.0:3000/)
 
 ## Description
 

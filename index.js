@@ -79,7 +79,13 @@ app.get('/books', function (req, res) {
 });
 
 app.get('/books/new', function (req, res) {
-  res.render('books/new');
+  database.getAllGenres()
+    .then(function(genres){
+      res.render('books/new', {
+        genres: genres
+      })
+    })
+    .catch(renderError(res))
 });
 
 app.get('/books/:bookId', function (req, res) {

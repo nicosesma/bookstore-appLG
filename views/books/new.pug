@@ -19,5 +19,11 @@ block content
       label
         span Author:
         input(name="book[authors][0][name]" type="text" value="")
+    fieldset
+      label
+        span Genres:
+        select(name="book[genres]" multiple)
+          for genre in genres
+            option(value=genre.id)= genre.name
     div
       input(type="submit" value="Create Book")

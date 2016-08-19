@@ -129,6 +129,23 @@ const associateAuthorsWithBook = function(authorIds, bookId){
   return Promise.all(queries)
 }
 
+const associateGenresWithBook = function(genreIds, bookId){
+  genreIds = Array.isArray(genreIds) ? genreIds : [genreIds]
+
+  console.log('IDs:', genreIds, bookId);
+
+  let queries = genreIds.map(genreId => {
+    let sql = `
+    INSERT INTO
+      book_genres(book_id, genre_id)
+    VALUES
+      ($1, $2)
+    `
+    return db.none(sql, [bookId, genreId])
+  })
+  return Promise.all(queries)
+}
+
 const createBook = function(attributes){
   const sql = `
   INSERT INTO
@@ -153,7 +170,8 @@ const createBook = function(attributes){
       authorIds = authorIds.map(x => x.id)
       const bookId = authorIds.shift()
       return Promise.all([
-        associateAuthorsWithBook(authorIds, bookId)
+        associateAuthorsWithBook(authorIds, bookId),
+        associateGenresWithBook(attributes.genres, bookId),
       ]).then(function(){
         return bookId;
       })

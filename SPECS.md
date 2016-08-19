@@ -23,17 +23,17 @@ Creating this web application will provide exposure to:
 - [X] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
 
 ## Quality Rubric
-- [ ] User-Friendly - Pages load fast, styled enough to not offend the eye
+- [X] User-Friendly - Pages load fast, styled enough to not offend the eye
 - [X] Tested - All specs passing
-- [ ] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
+- [X] Documented - In files like CONTRIBUTING.md, so that other devs can quickly start coding
 - [X] Functional - Project runs in localhost
 - [X] Structured - Directory structure allows new developers to quickly find and add files
 - [X] Clearly Named - Functions, variables, files, CSS classes and ids
 - [X] Abstracted - Small, single-responsibility functions leveraged for encapsulation & reusability
 - [X] Git Logged - Readable and clean with clear, complete, professional commit messages
-- [ ] Linted - Gets no unexpected errors from jshint linter
+- [X] Linted - Gets no unexpected errors from jshint linter
 - [ ] Reviewed - Passes [3.0 GPA] CodeClimate or peer code review
-- [ ] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
+- [X] Not Commented - Unless truly necessary. No dead code, console.logs, fits/xits
 
 ---
 

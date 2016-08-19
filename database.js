@@ -182,7 +182,7 @@ const searchForBooks = function(options){
   let variables = []
   let sql  = `
     SELECT
-      *
+      DISTINCT(books.*)
     FROM
       books
   `
@@ -195,7 +195,7 @@ const searchForBooks = function(options){
   }
   if (options.genres.length > 0) {
     sql += `
-      JOIN
+      LEFT JOIN
         book_genres
       ON
         book_genres.book_id=books.id
@@ -208,11 +208,11 @@ const searchForBooks = function(options){
 
   if (options.search_query) {
     sql += `
-      JOIN
+      LEFT JOIN
         book_authors
       ON
         book_authors.book_id=books.id
-      JOIN
+      LEFT JOIN
         authors
       ON
         authors.id=book_authors.author_id
